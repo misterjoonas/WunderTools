@@ -7,3 +7,5 @@
     mode: 0644
 - name: Solr Instance | Set correct name for solr collection
   template: src=core.properties.j2 dest=/usr/local/share/solr/drupal/solr/collection1/core.properties
+  notify:
+    - restart solr
