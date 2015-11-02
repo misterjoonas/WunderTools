@@ -108,6 +108,9 @@ docs:
   hostname : 'docs.local.ansibleref.com'
   dir : '/vagrant/docs'
 
+#Solr configuration
+solr_collection_name: 'ansibleref'
+
 # Nginx
 worker_processes: '1'
 nginx_sites:
