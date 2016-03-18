@@ -21,7 +21,7 @@ pushd `dirname $0` > /dev/null
 ROOT=`pwd -P`
 popd > /dev/null
 # Parse project config
-PROJECTCONF=$ROOT/conf/project.yml
+PROJECTCONF=$ROOT/conf/setup.yml
 eval $(parse_yaml $PROJECTCONF)
 ALIASFILE=${project_name}.aliases.drushrc.php
 ALIASPATH=$ROOT/drupal/conf/$ALIASFILE
