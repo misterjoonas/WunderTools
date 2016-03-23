@@ -1,4 +1,5 @@
-# taken from project.yml
+---
+# these come from project.yml
 project:
   name: <%= projectName %> #ansibleref
 ansible:
@@ -17,9 +18,8 @@ cpus : 2
 ip : <%= projectLocalIP %> #192.168.10.170
 box : <%= projectLocalBox %> #https://www.dropbox.com/s/wa0vs54lgngfcrx/vb-centos-6.5-x86_64-v0.box?dl=1
 # these come from vagrant.yml
----
-
-- hosts: vagrant
+hosts:
+  name: vagrant
   sudo: true
   roles:
    - role: common
@@ -89,28 +89,6 @@ php:
    options:
     - key: date.timezone
       val: Europe/Helsinki
-# - section: APC
-#   options:
-#    - key: apc.shm_size
-#      val: 256M
-#    - key: apc.ttl
-#      val: 0
-#    - key: apc.user_ttl
-#      val: 7200
-#    - key: apc.stat
-#      val: 1
-# - section: suhosin
-#   options:
-#     - key: suhosin.mail.protect
-#       val: 2
-#     - key: suhosin.filter.action
-#       val: 402
-#     - key: suhosin.log.syslog
-#       val: S_ALL & ~S_SQL
-#     - key: suhosin.post.max_vars
-#       val: 1000
-#     - key: suhosin.request.max_vars
-#       val: 1000
  - section: OPCACHE
    options:
     - key: opcache.memory
