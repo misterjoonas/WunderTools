@@ -117,7 +117,7 @@ ssl_ip_fix: false
 
 #Docs
 docs:
-  hostname : '<%= projectLocalDocsURL%>' #'docs.local.ansibleref.com'
+  hostname : 'docs.<%= projectLocalURL%>' #'docs.local.ansibleref.com'
   dir : '/vagrant/docs'
 
 # Nginx
