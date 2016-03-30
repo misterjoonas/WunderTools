@@ -1,43 +1,23 @@
 ---
 # these come from project.yml
 project:
-  name: <%= projectName %> #ansibleref
+  name: <%= projectName %>
 ansible:
-  remote: <%= wunderMachina %> #git@github.com:wunderkraut/WunderMachina.git
-  branch: <%= wunderMachina_branch %> #master
+  remote: <%= wunderMachina %>
+  branch: <%= wunderMachina_branch %>
   revision:
 buildsh:
-  enabled: <%= buildSh_enabled %> #true
-  branch: <%= buildSh_branch %> #develop
+  enabled: <%= buildSh_enabled %>
+  branch: <%= buildSh_branch %>
   revision:
 # these come from vagrant_local.yml
-name : <%= projectName %> #ansibleref
-hostname : <%= projectLocalURL%> #local.ansibleref.com
+name : <%= projectName %>
+hostname : <%= projectLocalURL%>
 mem : 2000
 cpus : 2
-ip : <%= projectLocalIP %> #192.168.10.170
-box : <%= projectLocalBox %> #https://www.dropbox.com/s/wa0vs54lgngfcrx/vb-centos-6.5-x86_64-v0.box?dl=1
-# these come from vagrant.yml
-hosts:
-  name: vagrant
-  sudo: true
-  roles:
-   - role: common
-   - role: cache
-   - role: database
-   - role: solr
-   - role: varnish
-   - role: web-front
-   - role: drupal
-   - role: devtools
-   - role: solr_config
+ip : <%= projectLocalIP %>
+box : <%= projectLocalBox %>
 # these come from variables.yml
-
----
-# file: roles/web-front/defaults/main.yml
-
-# file: roles/web-front/defaults/main.yml
-
 # Databases
 databases:
   drupal:
@@ -117,19 +97,19 @@ ssl_ip_fix: false
 
 #Docs
 docs:
-  hostname : 'docs.<%= projectLocalURL%>' #'docs.local.ansibleref.com'
+  hostname : 'docs.<%= projectLocalURL%>'
   dir : '/vagrant/docs'
 
 # Nginx
 worker_processes: '1'
 nginx_sites:
-  - hostname: '<%= projectLocalURL%> *.<%= projectLocalURL%>' #'local.ansibleref.com *.local.ansibleref.com'
+  - hostname: '<%= projectLocalURL%> *.<%= projectLocalURL%>'
     port: '8080 default_server'
     docroot: '/vagrant/drupal/current'
     accesslog: true
     accesslog_params: 'main buffer=32k'
     errorlog: true
-    logprefix: '<%= projectLocalURL%>' #'local.ansibleref.com'
+    logprefix: '<%= projectLocalURL%>'
     ssl: false
     sslproxy: false
     ssl_certificate: default.crt
