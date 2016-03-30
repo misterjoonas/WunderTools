@@ -17,26 +17,8 @@ mem : 2000
 cpus : 2
 ip : 192.168.10.170
 box : https://www.dropbox.com/s/wa0vs54lgngfcrx/vb-centos-6.5-x86_64-v0.box?dl=1
-# these come from vagrant.yml
-hosts:
-  name: vagrant
-  sudo: true
-  roles:
-    - role: common
-    - role: cache
-    - role: database
-    - role: solr
-    - role: varnish
-    - role: web-front
-    - role: drupal
-    - role: devtools
-    - role: solr_config
+
 # these come from variables.yml
-
-# file: roles/web-front/defaults/main.yml
-
-# file: roles/web-front/defaults/main.yml
-
 # Databases
 databases:
   drupal:
