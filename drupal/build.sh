@@ -92,6 +92,7 @@ class Maker:
 		self.temp_build_dir = os.path.abspath(self.temp_build_dir_name)
 		self.final_build_dir_name = settings['final']
 		self.final_build_dir = os.path.abspath(self.final_build_dir_name)
+		self.final_build_dir_bak = self.final_build_dir + "_bak"
 		self.old_build_dir = os.path.abspath(settings.get('previous', 'previous'))
 		self.makefile = os.path.abspath(settings.get('makefile', 'conf/site.make'))
 		self.profile_name = settings.get('profile', 'standard')
@@ -236,13 +237,14 @@ class Maker:
 		self.notice("Finalizing new build")
 		if os.path.isdir(self.final_build_dir):
 			self._ensure_writable(self.final_build_dir)
-                        self._unlink()
-			shutil.rmtree(self.final_build_dir)
+			self._unlink()
+			os.rename(self.final_build_dir, self.final_build_dir_bak)
 
 		# Make sure linking has happened
 		if not self.linked:
 			self.link()
 		os.rename(self.temp_build_dir, self.final_build_dir)
+		shutil.rmtree(self.final_build_dir_bak)
 
 	# Print notice
 	def notice(self, *args):
