@@ -1,0 +1,10 @@
+type: module
+name: Migrate Instagram
+description: 'Migrate Instagram updates from JSON source.'
+package: Migration
+core: 8.x
+dependencies:
+  - migrate_plus
+  - migrate_source_json
+config_devel:
+  - migrate_plus.migration.instagram

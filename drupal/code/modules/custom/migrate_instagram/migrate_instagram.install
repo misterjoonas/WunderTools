@@ -1,0 +1,10 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function migrate_instagram_uninstall() {
+  db_query("DELETE FROM {config} WHERE name LIKE 'migrate_plus.migration.instagram%'");
+  db_query("DELETE FROM {config} WHERE name LIKE 'migrate_plus.migration_group.instagram%'");
+  drupal_flush_all_caches();
+}
+?>
