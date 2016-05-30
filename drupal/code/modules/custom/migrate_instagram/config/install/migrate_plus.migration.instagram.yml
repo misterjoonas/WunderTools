@@ -1,43 +1,42 @@
-# Migration configuration for Instagram updates.
+uuid: 1611dd5f-ca97-4a18-8e40-dddb3703f203
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: YsV_-nMnNcoua-XPGc5B-GqHUx4UGviCvlMHu9nmgLc
 id: instagram
-label: Instagram
+migration_tags: null
 migration_group: migrate_instagram
-migration_dependencies: {}
-
+label: Instagram
 source:
   plugin: json_source
-  path: https://www.instagram.com/misterjoonas/media/
+  path: 'https://www.instagram.com/misterjoonas/media/'
   headers:
-    Accept: 'application/json'
+    Accept: application/json
   identifier: id
   identifierDepth: 1
-  readerClass: Drupal\migrate_instagram\Plugin\migrate\InstagramJSONReader
   fields:
     - link
-    - text
-    - count
-    - username
-    - image_url
-
 process:
-  # Media bundle.
   bundle:
     plugin: default_value
     default_value: instagram
-
-  name: text
+  name: caption/text
   field_instagram_link: link
-  field_caption: text
-  field_likes: count
-  field_username: username
-  field_image: image_url
-
+  field_caption: caption/text
+  field_likes: likes/count
+  field_username: user/username
+  field_image:
+    - source: images/standard_resolution/url
+      plugin: skip_on_empty
+      method: process
+    - plugin: instagram_image_import
   sticky:
     plugin: default_value
     default_value: 0
   uid:
     plugin: default_value
     default_value: 0
-
 destination:
-  plugin: entity:media
+  plugin: 'entity:media'
+migration_dependencies: {  }
