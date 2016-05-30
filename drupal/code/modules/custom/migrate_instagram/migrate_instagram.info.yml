@@ -8,3 +8,4 @@ dependencies:
   - migrate_source_json
 config_devel:
   - migrate_plus.migration.instagram
+  - migrate_plus.migration.instagram_image

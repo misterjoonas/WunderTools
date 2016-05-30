@@ -5,6 +5,7 @@
  */
 namespace Drupal\migrate_instagram\Plugin\migrate;
 use Drupal\migrate_source_json\Plugin\migrate\JSONReader;
+use Drupal\devel;
 /**
  * Object to retrieve and iterate over Instagram JSON data.
  */
@@ -15,9 +16,6 @@ class InstagramJSONReader extends JSONReader {
   public function getSourceFields($url) {
     $items = parent::getSourceFields($url);
     foreach ($items as &$item) {
-
-      debug($item, 'Item');
-
       // We need to dig into items array and make sure the mapped field values
       // appear on the root level of each $item for the migrate processing part
       if (isset($item['caption']) && is_array($item['caption'])) {
@@ -35,28 +33,18 @@ class InstagramJSONReader extends JSONReader {
           $item['username'] = $item['user']['username'];
         }
       }
-    }
-
-    return $items;
-
-    /*// Loop over the JSON values, walk the tree and extract as keyed values.
-    foreach ($items as &$item) {
-      if (isset($item['address_components']) && is_array($item['address_components'])) {
-        foreach ($item['address_components'] as $component) {
-          if (isset($component['long_name']) && isset($component['types']) && is_array($component['types'])) {
-            foreach ($component['types'] as $type) {
-              $item[$type] = $component['long_name'];
-            }
+      if (isset($item['images']) && is_array($item['images'])) {
+        if (isset($item['images']['standard_resolution']) && is_array($item['images']['standard_resolution'])) {
+          if (isset($item['images']['standard_resolution']['url'])) {
+            $item['uri'] = $item['images']['standard_resolution']['url'];
+            $filename = array_shift(explode('?' ,basename($item['images']['standard_resolution']['url'])));
+            $item['filename'] = $filename;
+            $item['filename_with_path'] = 'public://instagram/' . $filename;
           }
         }
       }
-      if (isset($item['geometry']['location']['lat'])) {
-        $item['lat'] = $item['geometry']['location']['lat'];
-      }
-      if (isset($item['geometry']['location']['lng'])) {
-        $item['lng'] = $item['geometry']['location']['lng'];
-      }
     }
-    return $items;*/
+
+    return $items;
   }
 }
