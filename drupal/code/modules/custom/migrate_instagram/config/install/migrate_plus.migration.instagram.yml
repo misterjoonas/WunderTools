@@ -22,6 +22,7 @@ process:
     plugin: default_value
     default_value: instagram
   name: caption/text
+  created: created_time
   field_instagram_link: link
   field_caption: caption/text
   field_likes: likes/count
